@@ -10,7 +10,8 @@ import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import { WorldClockComponent } from './world-clock/world-clock.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TitleComponent } from './title/title.component';
+import { TitleComponent } from './shared/title/title.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TitleComponent } from './title/title.component';
     StopwatchComponent,
     WorldClockComponent,
     WelcomeComponent,
-    TitleComponent
+    TitleComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,

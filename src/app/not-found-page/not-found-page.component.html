@@ -1,0 +1,33 @@
+
+<div class="NotFound">
+  <div class="Title">
+    <h1>404</h1>
+    <h2>Page not found</h2>
+
+    <p class="Navigate">Go to the other page: </p>
+
+    <div class="Buttons">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="handleNavigate('/world-clock')"
+      >
+        World Clock
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="handleNavigate('/timer')"
+      >
+        Timer
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="handleNavigate('/stopwatch')"
+      >
+        Stopwatch
+      </button>
+    </div>
+  </div>
+</div>

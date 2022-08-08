@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TimeService } from '../time.service';
+import { TimeService } from '../../time.service';
 
 @Component({
   selector: 'app-title',
