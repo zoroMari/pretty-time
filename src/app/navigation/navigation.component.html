@@ -1,0 +1,80 @@
+<mat-toolbar color="primary">
+  <img src="../../assets/logo.png" alt="Logo" class="Logo">
+  <div class="LogoName">
+    <a style="cursor: pointer;" routerLink="">PrettyTime</a>
+  </div>
+
+  <nav>
+    <ul class="Navigation">
+      <li>
+        <a
+          style="cursor: pointer;"
+          routerLinkActive="Active"
+          routerLink="/world-clock"
+        >
+          World Clock
+        </a>
+      </li>
+
+      <li>
+        <a
+          style="cursor: pointer;"
+          routerLinkActive="Active"
+          routerLink="/timer"
+        >
+          Timer
+        </a>
+      </li>
+
+      <li>
+        <a
+          style="cursor: pointer;"
+          routerLinkActive="Active"
+          routerLink="/stopwatch"
+        >
+          Stopwatch
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <span class="example-spacer"></span>
+
+  <div class="BurgerMenu">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <a
+        style="cursor: pointer;"
+        routerLink="/world-clock"
+        mat-menu-item
+      >
+        World Clock
+      </a>
+
+      <a
+      style="cursor: pointer;"
+      routerLink="/timer"
+      mat-menu-item
+      >
+        Timer
+      </a>
+
+      <a
+      style="cursor: pointer;"
+      routerLink="/stopwatch"
+      mat-menu-item
+      >
+        Stopwatch
+      </a>
+    </mat-menu>
+  </div>
+
+</mat-toolbar>
+
+

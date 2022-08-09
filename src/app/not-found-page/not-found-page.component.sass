@@ -1,0 +1,64 @@
+.NotFound
+  position: relative
+  width: 100%
+  height: 100%
+  background-image: url("../../assets/not-found-desktop.png")
+  background-repeat: no-repeat
+  background-size: cover
+  padding: 0px 48px
+
+  @media screen and (max-width: 800px)
+    background-image: url("../../assets/not-found-mobile.png")
+
+
+  .Title
+    position: absolute
+    display: flex
+    flex-direction: column
+    align-items: center
+    top: 160px
+    left: 20%
+    width: auto
+
+    @media screen and (max-width: 800px)
+      top: 48px
+      left: 50%
+      transform: translateX(-50%)
+      align-items: start
+      width: 300px
+
+    h1
+      font-size: 180px
+      line-height: 100%
+      font-weight: 200
+
+      @media screen and (max-width: 800px)
+        font-size: 160px
+
+    h2
+      font-size: 48px
+      font-weight: 200
+
+      @media screen and (max-width: 800px)
+        font-size: 40px
+
+
+    .Navigate
+      margin-top: 16px
+      font-size: 16px
+
+    .Buttons
+      display: flex
+      align-items: center
+      margin-top: 8px
+
+      @media screen and (max-width: 800px)
+        flex-direction: column
+        align-items: start
+
+
+      button:not(:last-child)
+        margin-right: 8px
+
+        @media screen and (max-width: 800px)
+          margin-bottom: 12px

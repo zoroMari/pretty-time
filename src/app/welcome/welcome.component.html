@@ -1,0 +1,46 @@
+<section class="Welcome">
+  <div class="Title">
+    <h1>Welcome to <span>PrettyTime</span></h1>
+    <p>
+      Here you will find everything you need to manage your time pretty.
+    </p>
+
+    <p>
+      Just go to one of our sections below:
+    </p>
+
+    <div class="Buttons">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="handleNavigate('/world-clock')"
+      >
+        World Clock
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="handleNavigate('/timer')"
+      >
+        Timer
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="handleNavigate('/stopwatch')"
+      >
+        Stopwatch
+      </button>
+    </div>
+  </div>
+
+  <div class="Desktop">
+    <img src="../../assets/welcome.png" alt="welcome">
+  </div>
+
+  <div class="Mobile">
+    <img src="../../assets/welcome-mobile.png" alt="welcome">
+  </div>
+
+</section>
+
