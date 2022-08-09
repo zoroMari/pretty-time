@@ -1,0 +1,80 @@
+@import '../shared/variables'
+
+.Welcome
+  display: flex
+  justify-content: space-between
+  padding: 0px 48px
+  height: 100%
+  width: 100%
+  overflow-x: hidden
+
+  .Title
+    display: flex
+    flex-direction: column
+    width: auto
+    flex-grow: 1
+    margin: auto
+    margin-left: 32px
+
+    h1
+      font-size: 72px
+      line-height: 130%
+      width: 100%
+      margin-bottom: 24px
+
+      span
+        color: $color-primary
+
+    p
+      font-size: 24px
+      line-height: 160%
+
+    .Buttons
+      margin-top: 32px
+
+      button
+        height: 48px
+        weight: auto
+
+      button:not(:last-child)
+        margin-right: 8px
+
+  @media screen and (max-width: 1200px)
+    margin-top: 64px
+    flex-direction: column
+    align-items: center
+
+  .Desktop
+    display: flex
+    align-items: flex-end
+    width: 50%
+    height: 100%
+
+    img
+      width: 100%
+      height: auto
+      max-width: 1000px
+
+    @media screen and (max-width: 1200px)
+      width: 80%
+
+    @media screen and (max-width: 800px)
+      display: none
+
+  .Mobile
+    display: flex
+    align-items: flex-end
+    width: 100%
+    height: auto
+
+    img
+      width: 100%
+      height: auto
+      max-width: 1000px
+
+
+    @media screen and (min-width: 800px)
+      display: none
+
+    @media screen and (max-width: 800px)
+      display: block
