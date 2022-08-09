@@ -1,3 +1,68 @@
 <app-title></app-title>
 
-<p>timer works!</p>
+<section class="Timer">
+  <p>Choose time and add name if you want</p>
+
+  <form *ngIf="!timerActive">
+
+    <div class="Inputs">
+      <mat-form-field appearance="fill">
+        <mat-label>Number of minutes</mat-label>
+        <input type="number" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Timer name</mat-label>
+        <input type="text" matInput placeholder="Timer name">
+      </mat-form-field>
+    </div>
+  </form>
+
+  <section class="SpinnerSection" *ngIf="timerActive">
+    <h2>Your progress</h2>
+
+    <div class="Spinner">
+      <mat-progress-spinner
+      [color]="color"
+      [mode]="mode"
+      [value]="value">
+    </mat-progress-spinner>
+    <p class="Result">{{ value }} min</p>
+    </div>
+
+  </section>
+
+
+  <div class="Buttons">
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      *ngIf="!timerActive"
+      (click)="handleStart()"
+    >
+      Start timer
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="secondary"
+      *ngIf="timerActive"
+      (click)="handlePause()"
+    >
+      Pause
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      *ngIf="timerActive"
+      (click)="handleStop()"
+    >
+      Stop
+    </button>
+  </div>
+
+</section>
+
+

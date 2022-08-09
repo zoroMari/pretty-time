@@ -7,6 +7,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   imports: [
@@ -17,6 +19,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     MatToolbarModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatButtonModule,
@@ -26,6 +29,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     MatToolbarModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class MaterialModule {

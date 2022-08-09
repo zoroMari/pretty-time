@@ -1,0 +1,59 @@
+@import '../shared/variables'
+
+.Timer
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: auto
+
+  .Inputs
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    margin-top: 8px
+
+    mat-form-field
+      width: 100%
+
+  .Buttons
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 201px
+    margin-top: 12px
+
+    button
+      width: 100%
+
+    button:not(:last-child)
+      margin-right: 8px
+
+  .SpinnerSection
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    h2
+      color: $color-accent
+      font-weight: 200
+
+    .Spinner
+      display: flex
+      flex-direction: column
+      align-content: center
+      align-items: center
+      margin: 16px 0px
+
+      mat-progress-spinner
+        height: 60px
+
+      .Result
+        margin: 16px 0px
+        font-size: 18px
+        font-weight: 700
+
+
+
+
