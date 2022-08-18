@@ -11,17 +11,32 @@
     flex-direction: column
     justify-content: space-between
     align-items: center
-    width: 100%
+    width: 320px
     margin-top: 8px
 
-    mat-form-field
+    & > mat-form-field
       width: 100%
+
+    .Time
+      display: flex
+      justify-content: space-between
+      align-items: center
+      width: 100%
+
+      mat-form-field
+        width: 100%
+        overflow-x: hidden
+
+
+      mat-form-field:not(:last-child)
+        margin-right: 8px
+
 
   .Buttons
     display: flex
     justify-content: center
     align-items: center
-    width: 201px
+    width: 160px
     margin-top: 12px
 
     button

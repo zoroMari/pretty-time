@@ -12,6 +12,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TitleComponent } from './shared/title/title.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

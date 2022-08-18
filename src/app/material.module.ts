@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -17,6 +18,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatToolbarModule,
     MatMenuModule,
     MatProgressSpinnerModule,
@@ -27,6 +29,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatToolbarModule,
     MatMenuModule,
     MatProgressSpinnerModule,
