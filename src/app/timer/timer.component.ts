@@ -26,7 +26,6 @@ export class TimerComponent implements OnInit {
   public timer!: number;
 
   public timerForm!: FormGroup;
-  public lastTimers: ITime[];
 
   constructor(
     private _route: ActivatedRoute,
@@ -36,13 +35,6 @@ export class TimerComponent implements OnInit {
 
   public ngOnInit(): void {
     this._timeService.title.next(this._route.snapshot.data['title']);
-
-    this._timerService.lastTimersChange.subscribe(
-      (lastTimers: ITime[]) => this.lastTimers = lastTimers
-    )
-
-    this.lastTimers = this._timerService.lastTimers;
-    console.log('lastTimers >>>', this.lastTimers);
 
     this.timerForm = new FormGroup({
       houres: new FormControl('0', [Validators.required, Validators.min(0)]),
@@ -92,7 +84,7 @@ export class TimerComponent implements OnInit {
 
   private _finishTimer() {
     clearInterval(this.timer);
-    
+
     this.value = 0;
     this.result = 0;
     this.progress = 0;

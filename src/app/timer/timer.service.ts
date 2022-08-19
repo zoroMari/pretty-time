@@ -14,7 +14,13 @@ export class TimerService {
 
   public saveNewTimers(timer: ITime): void {
     this._lastTimers = this.lastTimers;
-    this._lastTimers.push(timer);
+    if (this._lastTimers.length === 5) {
+      this._lastTimers.splice(0, 1);
+      this._lastTimers.push(timer);
+    } else {
+      this._lastTimers.push(timer);
+    }
+
     localStorage.setItem('lastTimers', JSON.stringify(this._lastTimers));
     this.lastTimersChange.next(this.lastTimers);
   }
