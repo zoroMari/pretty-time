@@ -60,10 +60,19 @@
       type="button"
       mat-raised-button
       color="secondary"
-      *ngIf="timerActive"
+      *ngIf="timerActive && !timerPause"
       (click)="handlePause()"
     >
       Pause
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="secondary"
+      *ngIf="timerPause"
+      (click)="handleContinue()"
+    >
+      Continue
     </button>
     <button
       type="button"
@@ -81,6 +90,29 @@
 <section class="LastTimers">
   <h2>Last Timers</h2>
 
+  <div class="TimersAll">
+    <div class="Timer" *ngFor="let timer of lastTimers, let i = index">
+      <div class="Index">
+        {{ i + 1 }}
+      </div>
+      <div class="Name">
+        Date: {{ timer.date | date }}
+      </div>
+      <div class="Name">
+        Name: {{ timer.name }}
+      </div>
+      <div class="Name">
+        Houres: {{ timer.houres }}
+      </div>
+      <div class="Name">
+        Minutes: {{ timer.minutes }}
+      </div>
+      <div class="Name">
+        Seconds: {{ timer.seconds }}
+      </div>
+
+    </div>
+  </div>
 
 </section>
 
