@@ -1,0 +1,64 @@
+<section class="SpinnerSection">
+  <h2>Your progress</h2>
+
+  <div class="Spinner">
+    <mat-progress-spinner
+      [color]="color"
+      [mode]="mode"
+      [value]="value">
+    </mat-progress-spinner>
+    <p class="Result">{{ result }}</p>
+  </div>
+
+  <div class="Buttons">
+    <button
+      type="button"
+      mat-raised-button
+      color="secondary"
+      *ngIf="!timerPause && !timerFinished"
+      (click)="handlePause()"
+    >
+      Pause
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="secondary"
+      *ngIf="timerPause && !timerFinished"
+      (click)="handleContinue()"
+    >
+      Continue
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      (click)="handleStop()"
+      *ngIf="!timerFinished"
+    >
+      Stop
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      (click)="handleRestart()"
+      *ngIf="timerFinished"
+    >
+      Restart
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="secondary"
+      (click)="handleGoBack()"
+      *ngIf="timerFinished"
+    >
+      Go Back
+    </button>
+  </div>
+
+</section>
+
+
+

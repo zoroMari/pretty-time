@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
+import { ITime } from '../ITime.model';
 import { TimeService } from '../time.service';
 import { TimerService } from './timer.service';
-import { ITime } from "../ITime.model";
+
 
 @Component({
   selector: 'app-timer',
@@ -16,14 +15,6 @@ export class TimerComponent implements OnInit {
   public timeMeasure: string[] = ['seconds', 'minutes', 'houres'];
   public title: string ='';
   public timerActive: boolean = false;
-  public timerPause: boolean = false;
-
-  public color: ThemePalette = 'accent';
-  public mode: ProgressSpinnerMode = 'determinate';
-  public value: number = 0;
-  public result: number = 0;
-  public progress = 0;
-  public timer!: number;
 
   public timerForm!: FormGroup;
 
@@ -35,6 +26,9 @@ export class TimerComponent implements OnInit {
 
   public ngOnInit(): void {
     this._timeService.title.next(this._route.snapshot.data['title']);
+    this._timerService.timerActive.subscribe(
+      (timerActive) => this.timerActive = timerActive
+    )
 
     this.timerForm = new FormGroup({
       houres: new FormControl('0', [Validators.required, Validators.min(0)]),
@@ -52,45 +46,17 @@ export class TimerComponent implements OnInit {
     return houres * 60 * 60 + minutes * 60 + seconds;
   }
 
+  allowStart() {
+    if (this.totalInSeconds === 0) return false;
+    else return true;
+  }
+
   public handleStart() {
-    this.timerActive = true;
-    const totalInSeconds = this.totalInSeconds;
-    const step = 100 / totalInSeconds;
+    this._timerService.timerActive.next(true);
 
-    this.timer = setInterval(() => {
-      this.progress = this.progress + 1 * 1000;
-      this.value += step;
-      this.result = this.result + 1;
-      if (this.progress >= totalInSeconds * 1000) {
-        clearInterval(this.timer);
-        this._finishTimer();
-      }
-    }, 1000);
   }
 
-  public handlePause() {
-    clearInterval(this.timer);
-    this.timerPause = true;
-  }
-
-  public handleContinue() {
-    this.timerPause = false;
-    this.handleStart();
-  }
-
-  public handleStop() {
-    this._finishTimer();
-  }
-
-  private _finishTimer() {
-    clearInterval(this.timer);
-
-    this.value = 0;
-    this.result = 0;
-    this.progress = 0;
-    this.timerActive = false;
-    this.timerPause = false;
-
+  public saveTimer() {
     this._timerService.saveNewTimers({
       date: new Date(),
       name: this.timerForm.value.name === '' ? 'Timer' : this.timerForm.value.name,
@@ -98,10 +64,5 @@ export class TimerComponent implements OnInit {
       minutes: this.timerForm.value.minutes,
       seconds: this.timerForm.value.seconds,
     })
-  }
-
-  allowStart() {
-    if (this.totalInSeconds === 0) return false;
-    else return true;
   }
 }

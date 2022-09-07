@@ -1,9 +1,9 @@
 <app-title></app-title>
 
-<section class="Timer">
-  <p  *ngIf="!timerActive">Choose time and add name if you want</p>
+<section class="Timer" *ngIf='!timerActive'>
+  <p>Choose time and add name if you want</p>
 
-  <form *ngIf="!timerActive" [formGroup]="timerForm">
+  <form [formGroup]="timerForm">
 
     <div class="Inputs">
       <div class="Time">
@@ -30,70 +30,31 @@
     </div>
   </form>
 
-  <section class="SpinnerSection" *ngIf="timerActive">
-    <h2>Your progress</h2>
-
-    <div class="Spinner">
-      <mat-progress-spinner
-      [color]="color"
-      [mode]="mode"
-      [value]="value">
-    </mat-progress-spinner>
-    <p class="Result">{{ result }}</p>
-    </div>
-
-  </section>
-
-
   <div class="Buttons">
     <button
       type="button"
       mat-raised-button
       color="accent"
-      *ngIf="!timerActive"
       (click)="handleStart()"
       [disabled]="!allowStart()"
     >
       Start timer
     </button>
-    <button
-      type="button"
-      mat-raised-button
-      color="secondary"
-      *ngIf="timerActive && !timerPause"
-      (click)="handlePause()"
-    >
-      Pause
-    </button>
-    <button
-      type="button"
-      mat-raised-button
-      color="secondary"
-      *ngIf="timerPause"
-      (click)="handleContinue()"
-    >
-      Continue
-    </button>
-    <button
-      type="button"
-      mat-raised-button
-      color="accent"
-      *ngIf="timerActive"
-      (click)="handleStop()"
-    >
-      Stop
-    </button>
   </div>
-
 </section>
 
-<section class="LastTimers">
+<app-timer-active
+  *ngIf='timerActive'
+  [totalInSeconds]="totalInSeconds"
+  (onFinishTimer)="saveTimer()"
+></app-timer-active>
+
+<section class="LastTimers"  *ngIf='!timerActive'>
   <h2>Last Timers</h2>
 
   <div class="TimersAll" >
     <app-timer-table></app-timer-table>
   </div>
-
 </section>
 
 

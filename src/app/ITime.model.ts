@@ -1,5 +1,5 @@
 export interface ITime {
-  date: Date;
+  date?: Date;
   name: string;
   houres: string;
   minutes: string;
