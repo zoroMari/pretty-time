@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ITime } from '../ITime.model';
 import { TimeService } from '../time.service';
 import { TimerService } from './timer.service';
 
@@ -38,7 +37,7 @@ export class TimerComponent implements OnInit {
     })
   }
 
-  public get totalInSeconds() {
+  public get totalInSeconds(): number {
     const houres: number = +this.timerForm.value.houres;
     const minutes: number = +this.timerForm.value.minutes;
     const seconds: number = +this.timerForm.value.seconds;
@@ -52,17 +51,49 @@ export class TimerComponent implements OnInit {
   }
 
   public handleStart() {
+    this._timerService.totalInSeconds.next(this.totalInSeconds);
     this._timerService.timerActive.next(true);
-
   }
 
-  public saveTimer() {
+  public saveTimer(fullfil: number) {
     this._timerService.saveNewTimers({
       date: new Date(),
       name: this.timerForm.value.name === '' ? 'Timer' : this.timerForm.value.name,
       houres: this.timerForm.value.houres,
       minutes: this.timerForm.value.minutes,
       seconds: this.timerForm.value.seconds,
-    })
+      fullfil: fullfil,
+    });
+
+    this.timerForm.setValue({
+      houres: '0',
+      minutes: '0',
+      seconds: '0',
+      name: '',
+    });
+  }
+
+  public handleRestart(index) {
+    const timerForRestart = this._timerService.lastTimers[index];
+
+    this.timerForm.setValue({
+      houres: timerForRestart.houres.toString(),
+      minutes: timerForRestart.minutes.toString(),
+      seconds: timerForRestart.seconds.toString(),
+      name: timerForRestart.name.toString(),
+    });
+
+    this.handleStart();
+  }
+
+  public handleRestartLast() {
+    const timerForRestart = this._timerService.lastTimers[0];
+
+    this.timerForm.setValue({
+      houres: timerForRestart.houres.toString(),
+      minutes: timerForRestart.minutes.toString(),
+      seconds: timerForRestart.seconds.toString(),
+      name: timerForRestart.name.toString(),
+    });
   }
 }

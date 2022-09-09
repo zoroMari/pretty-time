@@ -18,29 +18,34 @@ export class TimerActiveComponent implements OnInit {
 
   public timerPause = false;
   public timerFinished = false;
+  public totalInSeconds: number;
 
-  @Input() totalInSeconds: number;
-  @Output() onFinishTimer = new EventEmitter<any>();
+  @Output() onFinishTimer = new EventEmitter<number>();
+  @Output() onRestartTimer = new EventEmitter<any>();
+
 
   constructor(
     private _timerService: TimerService,
   ) {}
 
   ngOnInit(): void {
+    this._timerService.totalInSeconds.subscribe(
+      (totalInSeconds) => this.totalInSeconds = totalInSeconds
+    )
+
     this.startTimer();
   }
 
   public startTimer() {
     this.timerFinished = false;
 
-    const totalInSeconds = this.totalInSeconds;
-    const step = 100 / totalInSeconds;
+    const step = 100 / this.totalInSeconds;
 
     this.timer = setInterval(() => {
       this.progress = this.progress + 1 * 1000;
       this.value += step;
       this.result = this.result + 1;
-      if (this.progress >= totalInSeconds * 1000) {
+      if (this.progress >= this.totalInSeconds * 1000) {
         clearInterval(this.timer);
         this.handleStop();
       }
@@ -60,7 +65,9 @@ export class TimerActiveComponent implements OnInit {
   public handleStop() {
     this.timerFinished = true;
     clearInterval(this.timer);
-    this.onFinishTimer.emit();
+    const fullfil = Math.round(this.result / this.totalInSeconds * 100);
+
+    this.onFinishTimer.emit(fullfil);
   }
 
   private _clearTimer() {
@@ -70,7 +77,6 @@ export class TimerActiveComponent implements OnInit {
     this.result = 0;
     this.progress = 0;
     this.timerPause = false;
-
   }
 
   public handleGoBack() {
@@ -81,6 +87,7 @@ export class TimerActiveComponent implements OnInit {
 
   public handleRestart() {
     this._clearTimer();
+    this.onRestartTimer.emit();
     this.startTimer();
   }
 }

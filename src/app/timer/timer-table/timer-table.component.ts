@@ -1,4 +1,4 @@
-import { AfterViewInit, OnDestroy } from "@angular/core";
+import { AfterViewInit, EventEmitter, OnDestroy, Output } from "@angular/core";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -14,9 +14,12 @@ import { TimerService } from "../timer.service";
 export class TimerTableComponent implements OnInit, AfterViewInit, OnDestroy {
   public lastTimers: ITime[] = [];
   private _sub: Subscription;
+  @Output() onRestart = new EventEmitter<number>();
 
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['index', 'date', 'name', 'houres', 'minutes', 'seconds'];
+  displayedColumns: string[] = [
+    'index', 'date', 'name', 'houres', 'minutes', 'seconds', 'fullfil', 'restart'
+  ];
   dataSource = new MatTableDataSource<ITime>();
 
   constructor(
@@ -24,7 +27,7 @@ export class TimerTableComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.dataSource.data = this._timerService.lastTimers.reverse();
+    this.dataSource.data = this._timerService.lastTimers;
 
     this._sub = this._timerService.lastTimersChange.subscribe(
       (lastTimers: ITime[]) => {
@@ -37,6 +40,10 @@ export class TimerTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  handleRestart(index: number) {
+    this.onRestart.emit(index);
   }
 
   ngOnDestroy(): void {

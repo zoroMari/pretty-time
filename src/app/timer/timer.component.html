@@ -1,7 +1,7 @@
 <app-title></app-title>
 
 <section class="Timer" *ngIf='!timerActive'>
-  <p>Choose time and add name if you want</p>
+  <p>Choose time and add name, if you want</p>
 
   <form [formGroup]="timerForm">
 
@@ -45,15 +45,16 @@
 
 <app-timer-active
   *ngIf='timerActive'
-  [totalInSeconds]="totalInSeconds"
-  (onFinishTimer)="saveTimer()"
-></app-timer-active>
+  (onFinishTimer)="saveTimer($event)"
+  (onRestartTimer)="handleRestartLast()"
+>
+</app-timer-active>
 
 <section class="LastTimers"  *ngIf='!timerActive'>
   <h2>Last Timers</h2>
 
   <div class="TimersAll" >
-    <app-timer-table></app-timer-table>
+    <app-timer-table (onRestart)="handleRestart($event)"></app-timer-table>
   </div>
 </section>
 

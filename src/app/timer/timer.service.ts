@@ -8,6 +8,7 @@ export class TimerService {
   private _lastTimers: ITime[];
   public lastTimersChange = new Subject<ITime[]>();
   public timerActive = new BehaviorSubject<boolean>(false);
+  public totalInSeconds = new BehaviorSubject<number>(null);
 
   public get lastTimers() {
     if (localStorage.getItem('lastTimers')) return JSON.parse(localStorage.getItem('lastTimers'));
@@ -17,10 +18,10 @@ export class TimerService {
   public saveNewTimers(timer: ITime): void {
     this._lastTimers = this.lastTimers;
     if (this._lastTimers.length === 5) {
-      this._lastTimers.splice(0, 1);
-      this._lastTimers.push(timer);
+      this._lastTimers.splice(5, 1);
+      this._lastTimers.unshift(timer);
     } else {
-      this._lastTimers.push(timer);
+      this._lastTimers.unshift(timer);
     }
 
     localStorage.setItem('lastTimers', JSON.stringify(this._lastTimers));
