@@ -10,8 +10,8 @@ export class AppComponent implements OnInit {
   constructor(private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    console.log('this._route >>>', this._route);
-    console.log(' >>>', this._route.snapshot.data['title']);
+    // console.log('this._route >>>', this._route);
+    // console.log(' >>>', this._route.snapshot.data['title']);
     // this.title = this._route.snapshot.data['title'];
 
     // this._route.data.subscribe(

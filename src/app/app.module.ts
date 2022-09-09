@@ -12,6 +12,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TitleComponent } from './shared/title/title.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TimerTableComponent } from './timer/timer-table/timer-table.component';
+import { TimerActiveComponent } from './timer/timer-active/timer-active.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,15 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     WelcomeComponent,
     TitleComponent,
     NotFoundPageComponent,
+    TimerTableComponent,
+    TimerActiveComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

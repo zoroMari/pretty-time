@@ -1,3 +1,61 @@
 <app-title></app-title>
 
-<p>timer works!</p>
+<section class="Timer" *ngIf='!timerActive'>
+  <p>Choose time and add name, if you want</p>
+
+  <form [formGroup]="timerForm">
+
+    <div class="Inputs">
+      <div class="Time">
+        <mat-form-field appearance="fill">
+          <mat-label>Houres</mat-label>
+          <input type="number" min="0" matInput formControlName="houres">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Minutes</mat-label>
+          <input type="number" min="0" matInput formControlName="minutes">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Seconds</mat-label>
+          <input type="number" min="0" matInput formControlName="seconds">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Timer name</mat-label>
+        <input type="text" matInput placeholder="Timer name" formControlName="name">
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="Buttons">
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      (click)="handleStart()"
+      [disabled]="!allowStart()"
+    >
+      Start timer
+    </button>
+  </div>
+</section>
+
+<app-timer-active
+  *ngIf='timerActive'
+  (onFinishTimer)="saveTimer($event)"
+  (onRestartTimer)="handleRestartLast()"
+>
+</app-timer-active>
+
+<section class="LastTimers"  *ngIf='!timerActive'>
+  <h2>Last Timers</h2>
+
+  <div class="TimersAll" >
+    <app-timer-table (onRestart)="handleRestart($event)"></app-timer-table>
+  </div>
+</section>
+
+
