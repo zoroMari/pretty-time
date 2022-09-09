@@ -1,1 +1,4 @@
-<h1>{{ title }}</h1>
+<h1 *ngIf="!inputTitle">{{ title }}</h1>
+<h1 *ngIf="inputTitle">{{ title }}: <ng-content></ng-content></h1>
+
+

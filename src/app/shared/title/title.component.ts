@@ -8,6 +8,7 @@ import { TimeService } from '../../time.service';
 })
 export class TitleComponent implements OnInit {
   public title!: string;
+  @Input() inputTitle: boolean;
 
   constructor(
     private _timeService: TimeService,

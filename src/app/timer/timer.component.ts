@@ -13,7 +13,7 @@ import { TimerService } from './timer.service';
 export class TimerComponent implements OnInit {
   public timeMeasure: string[] = ['seconds', 'minutes', 'houres'];
   public title: string ='';
-  public timerActive: boolean = false;
+  public timerActive: boolean;
 
   public timerForm!: FormGroup;
 
@@ -24,10 +24,9 @@ export class TimerComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+     this.timerActive = false;
+
     this._timeService.title.next(this._route.snapshot.data['title']);
-    this._timerService.timerActive.subscribe(
-      (timerActive) => this.timerActive = timerActive
-    )
 
     this.timerForm = new FormGroup({
       houres: new FormControl('0', [Validators.required, Validators.min(0)]),
@@ -35,6 +34,20 @@ export class TimerComponent implements OnInit {
       seconds: new FormControl('0', [Validators.required, Validators.min(0)]),
       name: new FormControl(''),
     })
+
+    this._timerService.timerActive.subscribe(
+      (timerActive) => {
+        this.timerActive = timerActive;
+
+        if (timerActive === false ) {
+          this.timerForm.setValue({
+            houres: '0',
+            minutes: '0',
+            seconds: '0',
+            name: '',
+          });
+        }
+      })
   }
 
   public get totalInSeconds(): number {
@@ -63,13 +76,6 @@ export class TimerComponent implements OnInit {
       minutes: this.timerForm.value.minutes,
       seconds: this.timerForm.value.seconds,
       fullfil: fullfil,
-    });
-
-    this.timerForm.setValue({
-      houres: '0',
-      minutes: '0',
-      seconds: '0',
-      name: '',
     });
   }
 
