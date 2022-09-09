@@ -1,6 +1,7 @@
-<app-title></app-title>
+<app-title *ngIf="!timerActive"></app-title>
+<app-title [inputTitle]="true" *ngIf="timerActive">{{ timerForm.value.name }}</app-title>
 
-<section class="Timer" *ngIf='!timerActive'>
+<section class="Timer" *ngIf="!timerActive">
   <p>Choose time and add name, if you want</p>
 
   <form [formGroup]="timerForm">
