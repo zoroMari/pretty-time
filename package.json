@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng deploy --base-href=/<pretty-time>/"
+    "deploy": "ng deploy --base-href=/pretty-time/"
   },
   "private": true,
   "dependencies": {
