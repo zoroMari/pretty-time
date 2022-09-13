@@ -1,2 +1,78 @@
-<app-title></app-title>
-<p>stopwatch works!</p>
+<app-title *ngIf="!activeStopwatch"></app-title>
+<app-title [inputTitle]="true" *ngIf="activeStopwatch">{{ form.value.name ? form.value.name : 'Timer' }}</app-title>
+
+
+<article class="NewStopwatch">
+  <p *ngIf="!activeStopwatch">Add some name, if you want</p>
+
+  <form [formGroup]="form" *ngIf="!activeStopwatch">
+    <mat-form-field class="StopwatchName" appearance="fill">
+      <mat-label>Stopwatch name</mat-label>
+      <input matInput placeholder="Stopwatch name" formControlName="name">
+    </mat-form-field>
+  </form>
+
+  <section class="TimeBlocks" *ngIf="activeStopwatch">
+    <div class="OneBlock OneBlock_houres">
+      <div class="Name">Houres</div>
+      <div class="Value">{{ houres }}</div>
+    </div>
+
+    <div class="OneBlock OneBlock_minutes">
+      <div class="Name">Minutes</div>
+      <div class="Value">{{ minutes }}</div>
+    </div>
+
+    <div class="OneBlock OneBlock_seconds">
+      <div class="Name">Seconds</div>
+      <div class="Value">{{ seconds }}</div>
+    </div>
+  </section>
+
+  <section class="Buttons">
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="!activeStopwatch"
+      (click)="handleStart()"
+    >
+      Start
+    </button>
+    <button
+      mat-raised-button
+      color="secondary"
+      *ngIf="activeStopwatch && !pausedStopwatch"
+      (click)="handlePause()"
+    >
+      Pause
+    </button>
+    <button
+      mat-raised-button
+      color="secondary"
+      *ngIf="activeStopwatch && pausedStopwatch"
+      (click)="handleContinue()"
+    >
+      Continue
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="activeStopwatch"
+      (click)="handleStop()"
+    >
+      Stop
+    </button>
+  </section>
+</article>
+
+<section class="LastStopwatchers"  *ngIf='!activeStopwatch'>
+  <div class="Title">
+    <h2>Last Stopwatchers</h2>
+    <button mat-button color="warn" (click)="handleDeleteAll()">Clear all</button>
+  </div>
+
+  <div class="StopwatchersAll" >
+    <app-stopwatch-table></app-stopwatch-table>
+  </div>
+</section>
+

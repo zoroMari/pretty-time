@@ -1,0 +1,54 @@
+@import '../shared/variables'
+
+.NewStopwatch
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .TimeBlocks
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 320px
+    margin-bottom: 48px
+
+    .OneBlock:not(:last-child)
+      margin-right: 8px
+
+    .OneBlock
+      display: flex
+      flex-direction: column
+      align-items: center
+
+      .Value
+        margin-top: 12px
+        font-size: 32px
+        color: $color-accent
+
+  .Buttons
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    button:not(:last-child)
+      margin-right: 8px
+
+.LastStopwatchers
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-top: 80px
+
+  .StopwatchersAll
+    width: 100%
+
+  .Title
+    display: flex
+    align-items: center
+
+    h2
+      margin: 0px
+
+    button
+      height: 100%
+

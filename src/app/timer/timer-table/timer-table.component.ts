@@ -31,7 +31,7 @@ export class TimerTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this._sub = this._timerService.lastTimersChange.subscribe(
       (lastTimers: ITime[]) => {
-        this.dataSource.data = lastTimers.reverse();
+        this.dataSource.data = lastTimers;
       }
     )
 

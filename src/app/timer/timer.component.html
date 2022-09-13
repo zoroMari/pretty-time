@@ -1,5 +1,5 @@
 <app-title *ngIf="!timerActive"></app-title>
-<app-title [inputTitle]="true" *ngIf="timerActive">{{ timerForm.value.name }}</app-title>
+<app-title [inputTitle]="true" *ngIf="timerActive">{{ timerForm.value.name ? timerForm.value.name : 'Timer' }}</app-title>
 
 <section class="Timer" *ngIf="!timerActive">
   <p>Choose time and add name, if you want</p>
@@ -52,7 +52,10 @@
 </app-timer-active>
 
 <section class="LastTimers"  *ngIf='!timerActive'>
-  <h2>Last Timers</h2>
+  <div class="Title">
+    <h2>Last Timers</h2>
+    <button mat-button color="warn" (click)="handleDeleteAll()">Clear all</button>
+  </div>
 
   <div class="TimersAll" >
     <app-timer-table (onRestart)="handleRestart($event)"></app-timer-table>
