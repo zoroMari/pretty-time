@@ -15,6 +15,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { TimerTableComponent } from './timer/timer-table/timer-table.component';
 import { TimerActiveComponent } from './timer/timer-active/timer-active.component';
+import { StopwatchTableComponent } from './stopwatch/stopwatch-table/stopwatch-table.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TimerActiveComponent } from './timer/timer-active/timer-active.componen
     NotFoundPageComponent,
     TimerTableComponent,
     TimerActiveComponent,
+    StopwatchTableComponent,
   ],
   imports: [
     BrowserModule,

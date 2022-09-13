@@ -1,9 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TimeService } from '../time.service';
 import { TimerService } from './timer.service';
-
+import { totalInSeconds } from '../shared/common-functions';
 
 @Component({
   selector: 'app-timer',
@@ -55,7 +55,7 @@ export class TimerComponent implements OnInit {
     const minutes: number = +this.timerForm.value.minutes;
     const seconds: number = +this.timerForm.value.seconds;
 
-    return houres * 60 * 60 + minutes * 60 + seconds;
+    return totalInSeconds(houres, minutes, seconds);
   }
 
   allowStart() {
@@ -101,5 +101,9 @@ export class TimerComponent implements OnInit {
       seconds: timerForRestart.seconds.toString(),
       name: timerForRestart.name.toString(),
     });
+  }
+
+  public handleDeleteAll() {
+    this._timerService.deleteAllTimers();
   }
 }

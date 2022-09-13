@@ -18,13 +18,18 @@ export class TimerService {
   public saveNewTimers(timer: ITime): void {
     this._lastTimers = this.lastTimers;
     if (this._lastTimers.length === 5) {
-      this._lastTimers.splice(5, 1);
+      this._lastTimers.splice(4, 1);
       this._lastTimers.unshift(timer);
     } else {
       this._lastTimers.unshift(timer);
     }
 
     localStorage.setItem('lastTimers', JSON.stringify(this._lastTimers));
+    this.lastTimersChange.next(this.lastTimers);
+  }
+
+  public deleteAllTimers() {
+    localStorage.setItem('lastTimers', JSON.stringify([]));
     this.lastTimersChange.next(this.lastTimers);
   }
 }
