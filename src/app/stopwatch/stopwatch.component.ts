@@ -38,12 +38,12 @@ export class StopwatchComponent implements OnInit {
     this.timer = setInterval(() => {
       this.seconds += 1;
 
-      if (this.seconds === 10) {
+      if (this.seconds === 60) {
         this.minutes += 1;
         this.seconds = 0;
       }
 
-      if (this.minutes === 2) {
+      if (this.minutes === 60) {
         this.houres += 1;
         this.minutes = 0;
         this.seconds = 0;
