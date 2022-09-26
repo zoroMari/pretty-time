@@ -1,3 +1,49 @@
 <app-title></app-title>
 
-<p>world-clock works!</p>
+<form [formGroup]="timeZoneForm" class="CountriesSelect">
+  <mat-form-field appearance="fill" >
+    <mat-label>Select area</mat-label>
+    <mat-select formControlName="area">
+      <mat-option *ngFor="let area of areas" [value]="area">
+        {{ area }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select country</mat-label>
+    <mat-select formControlName="city">
+      <mat-option *ngFor="let city of cities" [value]="city">
+        {{ city }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="accent"
+    [disabled]="!timeZoneForm.get('area').dirty && !timeZoneForm.get('city').dirty"
+    (click)="handleGetTime()"
+  >
+    What time
+  </button>
+</form>
+
+
+<section class="ActiveTime" *ngIf="activePlaceAndDate.date">
+  <div class="City">
+    <h2>{{ activePlaceAndDate.area }} {{ activePlaceAndDate.city }}</h2>
+  </div>
+
+  <div class="Date">
+    <p>Date:</p>
+    <h3>{{ activePlaceAndDate.date| date:'mediumDate' }}</h3>
+  </div>
+
+  <div class="Time">
+    <p>Time:</p>
+    <h3>{{ activePlaceAndDate.date | date:'mediumTime' }}</h3>
+  </div>
+</section>
+
+
