@@ -35,15 +35,33 @@
     <h2>{{ activePlaceAndDate.area }} {{ activePlaceAndDate.city }}</h2>
   </div>
 
-  <div class="Date">
-    <p>Date:</p>
-    <h3>{{ activePlaceAndDate.date| date:'mediumDate' }}</h3>
-  </div>
+  <section class="DateAndTime">
+    <div class="Date">
+      <p class="Title">Date:</p>
+      <div class="ActualData">
+        <mat-icon color="accent">
+          <span class="material-symbols-outlined">
+            today
+          </span>
+        </mat-icon>
+        <p class="ActualData Data">{{ activePlaceAndDate.date| date:'mediumDate' }}</p>
+      </div>
+    </div>
 
-  <div class="Time">
-    <p>Time:</p>
-    <h3>{{ activePlaceAndDate.date | date:'mediumTime' }}</h3>
-  </div>
+    <div class="Time">
+      <p class="Title">Time:</p>
+      <div class="ActualData">
+        <mat-icon color="accent">
+          <span class="material-symbols-outlined">
+            schedule
+          </span>
+        </mat-icon>
+        <p class="ActualData Data">{{ activePlaceAndDate.date | date:'mediumTime' }}</p>
+      </div>
+    </div>
+  </section>
+
+
 </section>
 
 

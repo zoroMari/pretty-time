@@ -46,13 +46,6 @@ export class WorldClockService {
 
   public fetchTime(area: string, city: string) {
     return this._http.get(`http://worldtimeapi.org/api/timezone/${area}/${city}`)
-      // .pipe(map(
-      //   value => {
-      //     let date = value;
-      //      console.log('date >>>', date);
-      //     return date;
-      //   }
-      // ));
   }
 
 }

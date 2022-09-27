@@ -66,9 +66,6 @@ export class WorldClockComponent implements OnInit {
       value => {
         dateAndTime = value;
         this.activePlaceAndDate.date = new Date(dateAndTime.datetime);
-
-        console.log('this.activePlaceAndDate >>>', this.activePlaceAndDate);
-
       }
     );
 
