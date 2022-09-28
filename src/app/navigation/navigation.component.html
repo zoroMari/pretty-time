@@ -10,16 +10,6 @@
         <a
           style="cursor: pointer;"
           routerLinkActive="Active"
-          routerLink="/world-clock"
-        >
-          World Clock
-        </a>
-      </li>
-
-      <li>
-        <a
-          style="cursor: pointer;"
-          routerLinkActive="Active"
           routerLink="/timer"
         >
           Timer
@@ -33,6 +23,16 @@
           routerLink="/stopwatch"
         >
           Stopwatch
+        </a>
+      </li>
+
+      <li>
+        <a
+          style="cursor: pointer;"
+          routerLinkActive="Active"
+          routerLink="/world-clock"
+        >
+          World Clock
         </a>
       </li>
     </ul>
@@ -50,14 +50,6 @@
 
     <mat-menu #menu="matMenu">
       <a
-        style="cursor: pointer;"
-        routerLink="/world-clock"
-        mat-menu-item
-      >
-        World Clock
-      </a>
-
-      <a
       style="cursor: pointer;"
       routerLink="/timer"
       mat-menu-item
@@ -71,6 +63,14 @@
       mat-menu-item
       >
         Stopwatch
+      </a>
+
+      <a
+        style="cursor: pointer;"
+        routerLink="/world-clock"
+        mat-menu-item
+      >
+        World Clock
       </a>
     </mat-menu>
   </div>

@@ -1,12 +1,18 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs";
+import { map, Subject } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class WorldClockService {
+  public waitingTime = new Subject<boolean>();
+  public waitingAreas = new Subject<boolean>();
+  public waitingCities = new Subject<boolean>();
+
   constructor(private _http: HttpClient) {}
 
   public fetchAreas() {
+    this.waitingAreas.next(true);
+
     return this._http.get('http://worldtimeapi.org/api/timezone')
       .pipe(map(
         value => {
@@ -30,6 +36,8 @@ export class WorldClockService {
   }
 
   public fetchCities(area: string) {
+    this.waitingCities.next(true);
+
     return this._http.get<string[]>(`http://worldtimeapi.org/api/timezone/${area}`)
       .pipe(map(
         value => {
@@ -45,6 +53,8 @@ export class WorldClockService {
   }
 
   public fetchTime(area: string, city: string) {
+    this.waitingTime.next(true);
+
     return this._http.get(`http://worldtimeapi.org/api/timezone/${area}/${city}`)
   }
 
