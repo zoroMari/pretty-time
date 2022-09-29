@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TimerTableComponent } from './timer/timer-table/timer-table.component';
 import { TimerActiveComponent } from './timer/timer-active/timer-active.component';
 import { StopwatchTableComponent } from './stopwatch/stopwatch-table/stopwatch-table.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { StopwatchTableComponent } from './stopwatch/stopwatch-table/stopwatch-t
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MaterialModule,
     AppRoutingModule,
     ReactiveFormsModule,

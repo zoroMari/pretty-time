@@ -1,3 +1,88 @@
 <app-title></app-title>
 
-<p>world-clock works!</p>
+<mat-spinner [diameter]=32 *ngIf="areasWaiting && !error"></mat-spinner>
+
+<div class="Error" *ngIf="error">
+  <p>Sorry, something went wrong!</p>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="handleTryAgain()"
+  >
+    Try again
+  </button>
+</div>
+
+<form [formGroup]="timeZoneForm" class="CountriesSelect" *ngIf="!areasWaiting && !error">
+  <mat-form-field appearance="fill" [ngClass]="citiesWaiting ? 'Area Waiting' : 'Area'">
+    <mat-label>Select area</mat-label>
+    <mat-select formControlName="area">
+      <mat-option *ngFor="let area of areas" [value]="area">
+        {{ area }}
+      </mat-option>
+    </mat-select>
+    <mat-hint class="CitiesHint" *ngIf="citiesWaiting">
+      <mat-spinner [diameter]=16></mat-spinner>
+      <span>Wait a bit, we are looking for cities for you!</span>
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="City">
+    <mat-label>Select city</mat-label>
+    <mat-select
+      formControlName="city"
+      [disabled]="!timeZoneForm.get('area').value || !cities || citiesWaiting"
+    >
+      <mat-option *ngFor="let city of cities" [value]="city">
+        {{ city }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="accent"
+    [disabled]="!timeZoneForm.get('area').dirty || !timeZoneForm.get('city').dirty"
+    (click)="handleGetTime()"
+  >
+    What time
+  </button>
+</form>
+
+<mat-spinner [diameter]=32 *ngIf="timeWaiting && !error"></mat-spinner>
+
+<section class="ActiveTime" *ngIf="activePlaceAndDate.date && !timeWaiting && !error">
+  <div class="City">
+    <h2>{{ activePlaceAndDate.area }} {{ activePlaceAndDate.city }}</h2>
+  </div>
+
+  <section class="DateAndTime">
+    <div class="Date">
+      <p class="Title">Date:</p>
+      <div class="ActualData">
+        <mat-icon color="accent">
+          <span class="material-symbols-outlined">
+            today
+          </span>
+        </mat-icon>
+        <p class="ActualData Data">{{ activePlaceAndDate.date| date:'mediumDate' }}</p>
+      </div>
+    </div>
+
+    <div class="Time">
+      <p class="Title">Time:</p>
+      <div class="ActualData">
+        <mat-icon color="accent">
+          <span class="material-symbols-outlined">
+            schedule
+          </span>
+        </mat-icon>
+        <p class="ActualData Data">{{ activePlaceAndDate.date | date:'mediumTime' }}</p>
+      </div>
+    </div>
+  </section>
+
+
+</section>
+
+
