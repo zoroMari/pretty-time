@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TimeService } from '../time.service';
@@ -37,8 +37,17 @@ export class WorldClockComponent implements OnInit, OnDestroy {
     private _worldClock: WorldClockService,
   ) {}
 
+  // 2022-10-06T15:51:43.006548+03:00
   ngOnInit(): void {
     this.error = false;
+    this._timeService.title.next(this._route.snapshot.data['title']);
+
+    this.timeZoneForm = new FormGroup({
+      area: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+    })
+
+    this._fetchAreas();
 
     this._sub.add(
       this._worldClock.waitingTime.subscribe(
@@ -57,15 +66,6 @@ export class WorldClockComponent implements OnInit, OnDestroy {
         value => this.citiesWaiting = value
       )
     );
-
-    this._timeService.title.next(this._route.snapshot.data['title']);
-
-    this.timeZoneForm = new FormGroup({
-      area: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-    })
-
-    this._fetchAreas();
 
     this._sub.add(
       this.timeZoneForm.get('area').valueChanges.subscribe(
@@ -97,7 +97,7 @@ export class WorldClockComponent implements OnInit, OnDestroy {
       this._worldClock.fetchTime(this.activePlaceAndDate.area, this.activePlaceAndDate.city).subscribe(
         value => {
           dateAndTime = value;
-          this.activePlaceAndDate.date = new Date(dateAndTime.datetime);
+          this.activePlaceAndDate.date = new Date(Date.parse(this._deleteUTCfromString(dateAndTime.datetime)));
           this._worldClock.waitingTime.next(false);
         },
         error => {
@@ -105,7 +105,6 @@ export class WorldClockComponent implements OnInit, OnDestroy {
         }
       )
     )
-
 
     this.timeZoneForm.reset();
   }
@@ -131,6 +130,14 @@ export class WorldClockComponent implements OnInit, OnDestroy {
         this.error = true;
       }
     );
+  }
+
+  private _deleteUTCfromString(value:string) {
+    return value.slice(0, -6);
+  }
+
+  public toDisable() {
+   return !this.timeZoneForm.get('area').value || !this.cities || this.citiesWaiting
   }
 
 }

@@ -31,7 +31,7 @@
     <mat-label>Select city</mat-label>
     <mat-select
       formControlName="city"
-      [disabled]="!timeZoneForm.get('area').value || !cities || citiesWaiting"
+      [disabled]="toDisable()"
     >
       <mat-option *ngFor="let city of cities" [value]="city">
         {{ city }}
@@ -65,7 +65,7 @@
             today
           </span>
         </mat-icon>
-        <p class="ActualData Data">{{ activePlaceAndDate.date| date:'mediumDate' }}</p>
+        <p class="ActualData Data">{{ activePlaceAndDate.date | date:'mediumDate' }}</p>
       </div>
     </div>
 
@@ -81,8 +81,4 @@
       </div>
     </div>
   </section>
-
-
 </section>
-
-
