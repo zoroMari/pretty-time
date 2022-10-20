@@ -13,7 +13,7 @@ export class WorldClockService {
   public fetchAreas() {
     this.waitingAreas.next(true);
 
-    return this._http.get('http://worldtimeapi.org/api/timezone')
+    return this._http.get('http://worldtimeapi.org/api/timezone/')
       .pipe(map(
         value => {
           let areas = [];
@@ -38,7 +38,7 @@ export class WorldClockService {
   public fetchCities(area: string) {
     this.waitingCities.next(true);
 
-    return this._http.get<string[]>(`http://worldtimeapi.org/api/timezone/${area}`)
+    return this._http.get<string[]>(`http://worldtimeapi.org/api/timezone/${area}/`)
       .pipe(map(
         value => {
           let cities = [];
@@ -55,7 +55,7 @@ export class WorldClockService {
   public fetchTime(area: string, city: string) {
     this.waitingTime.next(true);
 
-    return this._http.get(`http://worldtimeapi.org/api/timezone/${area}/${city}`)
+    return this._http.get(`http://worldtimeapi.org/api/timezone/${area}/${city}/`)
   }
 
 }
